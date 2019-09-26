@@ -355,6 +355,9 @@ PermitRootLogin without-password
 
 [root@tp1 ~]# systemctl restart sshd
 
+[root@tp1 ~]# firewall-cmd --permanent --add-port=2222/tcp
+success
+[root@tp1 ~]# systemctl restart firewalld
 
 [root@patron ~]# ssh root@192.168.5.10 -p 2222 -i id_rsa
 ```
@@ -362,3 +365,46 @@ PermitRootLogin without-password
 Lien vers la capture Wireshark [ici](./ssh_cap.pcapng).
 
 ## Routage
+
+| Machines | 192.168.100.0/24 | 192.168.200.0/24 |  NAT |
+|:--------:|:----------------:|:----------------:|:----:|
+|    R1    |  192.168.100.254 |  192.168.200.254 | DHCP |
+|   TP1-1  |   192.168.100.1  |         X        |   X  |
+|   TP1-2  |         X        |   192.168.200.1  |   X  |
+
+* Machine 1 (TP1-1) :
+
+![TP1-1](tp1-1.png)
+
+* Machine 2 (TP1-2) :
+
+![TP1-1](tp1-2.png)
+
+* Routeur 1 (R1) :
+
+```cisco
+R1#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)#int g0/0
+R1(config-if)#ip add dhcp
+R1(config-if)#no shut
+R1(config-if)#int g1/0
+R1(config-if)#ip add 192.168.100.254 255.255.255.0
+R1(config-if)#no shut
+R1(config-if)#int g2/0
+R1(config-if)#ip add 192.168.200.254 255.255.255.0
+R1(config-if)#no shut
+R1(config)#do wr
+Warning: Attempting to overwrite an NVRAM configuration previously written
+by a different version of the system image.
+Overwrite the previous NVRAM configuration?[confirm]
+Building configuration...
+[OK]
+R1(config)#do sh ip int br
+Interface              IP-Address      OK? Method Status                Protocol
+Ethernet0/0            unassigned      YES unset  administratively down down
+GigabitEthernet0/0     192.168.235.140 YES DHCP   up                    up
+GigabitEthernet1/0     192.168.100.254 YES manual up                    up
+GigabitEthernet2/0     192.168.200.254 YES manual up                    up
+GigabitEthernet3/0     unassigned      YES unset  administratively down down
+```
