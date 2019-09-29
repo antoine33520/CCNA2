@@ -2,7 +2,7 @@
 
 ## I. Gather informations
 
-* Liste des cartes réseaux :
+- Liste des cartes réseaux :
 
 ```bash
 [root@tp1 ~]# ip a
@@ -27,7 +27,7 @@
 
 ```
 
-* Bail DHCP :
+- Bail DHCP :
 
 ```bash
 [root@tp1 ~]# cat /var/lib/dhclient/dhclient.leases
@@ -63,7 +63,7 @@ lease {
 }
 ```
 
-* Table de routage :
+- Table de routage :
 
 ```bash
 [root@tp1 ~]# ip route
@@ -76,7 +76,7 @@ default via 192.168.235.2 dev ens34 proto dhcp metric 101
 La première ligne indique la route par défaut pour celles qui ne sont pas définient statiquement.
 Les deux autres lignes sont présentes car ce ceux les réseaux auxquels les cartes sont physiquement reliées.
 
-* Ports en écoute :
+- Ports en écoute :
 
 ```bash
 [root@tp1 ~]# ss -l -t -u
@@ -88,7 +88,7 @@ tcp         LISTEN        0             128                                 0.0.
 tcp         LISTEN        0             128                                    [::]:ssh                          [::]:*
 ```
 
-* ARp :
+- ARp :
 
 ```bash
 [root@tp1 ~]# ip n
@@ -96,7 +96,7 @@ tcp         LISTEN        0             128                                    [
 192.168.235.1 dev ens34 lladdr 00:50:56:c0:00:08 REACHABLE
 ```
 
-* DNS :
+- DNS :
 
 ```bash
 [root@tp1 ~]# cat /etc/resolv.conf
@@ -154,7 +154,7 @@ k.gtld-servers.net.     5       IN      A       192.52.178.30
 ;; MSG SIZE  rcvd: 500
 ```
 
-* Firewall :
+- Firewall :
 
 ```bash
 [root@tp1 ~]# systemctl status firewalld
@@ -195,7 +195,7 @@ table ip filter {
 }
 ```
 
-* Changement IP :
+- Changement IP :
 
 ```bash
 [root@tp1 ~]# vi /etc/sysconfig/network-scripts/ifcfg-ens33
@@ -220,7 +220,7 @@ IPADDR=192.168.5.10
 PREFIX=24
 ```
 
-* Nouvelle carte :
+- Nouvelle carte :
 
 ```bash
 [root@tp1 ~]# vi /etc/sysconfig/network-scripts/ifcfg-ens37
@@ -246,7 +246,7 @@ ONBOOT=yes
 AUTOCONNECT_PRIORITY=-999
 ```
 
-* Bonding :
+- Bonding :
 
 ```bash
 [root@tp1 ~]# vi /etc/sysconfig/network-scripts/ifcfg-ens37
@@ -276,9 +276,9 @@ AUTOCONNECT_PRIORITY=-999
 
 [root@tp1 ~]# nmcli connection show
 NAME   UUID                                  TYPE      DEVICE
-ens33  d2a66942-f2a9-4828-aa36-5e32681ff2fb  ethernet  ens33  
-ens34  50bdbe70-a6e7-4671-ac44-9d4384095f44  ethernet  ens34  
-ens37  4d529f00-1638-33cb-afa3-51f43ff49148  ethernet  ens37  
+ens33  d2a66942-f2a9-4828-aa36-5e32681ff2fb  ethernet  ens33
+ens34  50bdbe70-a6e7-4671-ac44-9d4384095f44  ethernet  ens34
+ens37  4d529f00-1638-33cb-afa3-51f43ff49148  ethernet  ens37
 
 [root@tp1 ~]# nmcli connection delete 4d529f00-1638-33cb-afa3-51f43ff49148
 Connection 'ens37' (4d529f00-1638-33cb-afa3-51f43ff49148) successfully deleted.
@@ -310,10 +310,10 @@ Connection successfully activated (master waiting for slaves) (D-Bus active path
 
 [root@tp1 ~]# nmcli connection show
 NAME                UUID                                  TYPE      DEVICE
-ens34               50bdbe70-a6e7-4671-ac44-9d4384095f44  ethernet  ens34  
-team0               ea9b0be2-d40e-4a26-851f-cbb15361f113  team      team0  
-team0-slave0        7bf73d86-4fa0-42ed-a339-3005e8314621  ethernet  ens33  
-team0-slave1        c6a971ac-b7c0-4842-9ceb-9823cf34837a  ethernet  ens37  
+ens34               50bdbe70-a6e7-4671-ac44-9d4384095f44  ethernet  ens34
+team0               ea9b0be2-d40e-4a26-851f-cbb15361f113  team      team0
+team0-slave0        7bf73d86-4fa0-42ed-a339-3005e8314621  ethernet  ens33
+team0-slave1        c6a971ac-b7c0-4842-9ceb-9823cf34837a  ethernet  ens37
 Wired connection 1  4d529f00-1638-33cb-afa3-51f43ff49148  ethernet  --
 Wired connection 2  e97787fa-1971-3fb2-8872-e9a7f278c1de  ethernet  --
 
@@ -343,7 +343,7 @@ Wired connection 2  e97787fa-1971-3fb2-8872-e9a7f278c1de  ethernet  --
 
 ```
 
-* SSH :
+- SSH :
 
 ```bash
 [root@tp1 ~]# vi /etc/ssh/sshd_config
@@ -366,21 +366,23 @@ Lien vers la capture Wireshark [ici](./ssh_cap.pcapng).
 
 ## Routage
 
-| Machines | 192.168.100.0/24 | 192.168.200.0/24 |  NAT |
-|:--------:|:----------------:|:----------------:|:----:|
-|    R1    |  192.168.100.254 |  192.168.200.254 | DHCP |
-|   TP1-1  |   192.168.100.1  |         X        |   X  |
-|   TP1-2  |         X        |   192.168.200.1  |   X  |
+![Infra](./gns3.png)
 
-* Machine 1 (TP1-1) :
+| Machines | 192.168.100.0/24 | 192.168.200.0/24 | NAT  |
+| :------: | :--------------: | :--------------: | :--: |
+|    R1    | 192.168.100.254  | 192.168.200.254  | DHCP |
+|  TP1-1   |  192.168.100.1   |        X         |  X   |
+|  TP1-2   |        X         |  192.168.200.1   |  X   |
 
-![TP1-1](tp1-1.png)
+- Machine 1 (TP1-1) :
 
-* Machine 2 (TP1-2) :
+![TP1-1](./tp1-1.png)
 
-![TP1-1](tp1-2.png)
+- Machine 2 (TP1-2) :
 
-* Routeur 1 (R1) :
+![TP1-2](./tp1-2.png)
+
+- Routeur 1 (R1) :
 
 ```cisco
 R1#conf t
@@ -408,3 +410,69 @@ GigabitEthernet1/0     192.168.100.254 YES manual up                    up
 GigabitEthernet2/0     192.168.200.254 YES manual up                    up
 GigabitEthernet3/0     unassigned      YES unset  administratively down down
 ```
+
+Ensuite si on lance une capture sur le lien reliant le routeur à internet et un ping vers `google.fr` depuis la VM TP1-1 on voit que les paquets passent par le routeur pourjoindre internet.
+Résultat de la capture [ici](./icmp_cap.pcapng).
+
+R1 étant pour les 2 VMs la passerelle par défaut tous les paquets qui sont destinés pour un réseau autre que celui auquel est directement connecté la machine source passeront par R1 qui établira une route vers le réseau de destination.
+
+## Iftop
+
+Iftop est un utilitaire en ligne de commande qui permet de voir les aplications et services qui utilisent de la bande passante.
+Pour Centos 8 il est disponible sur le dépôt `epel`.
+
+## Cockpit
+
+Cockpit est une interface wbe pour la gestion d'une machine, j'ai déjà eu l'occasion de l'utiliser quelques fois sur RHEL lors de divers tests.
+
+```bash
+[root@tp1-1 ~]# dnf -y install cockpit
+[root@tp1-1 ~]# systemctl start cockpit
+
+```
+
+Après l'installation de cockpit on vérifie sur quel port il écoute et on l'ouvre dans le pare-feu.
+
+```bash
+[root@tp1-1 ~]# ss -tlpna
+State  Recv-Q   Send-Q        Local Address:Port      Peer Address:Port                                                           
+LISTEN 0        128                 0.0.0.0:22             0.0.0.0:*       users:(("sshd",pid=872,fd=6))                          
+ESTAB  0        52          192.168.235.154:22       192.168.235.1:56486   users:(("sshd",pid=6557,fd=5),("sshd",pid=6542,fd=5))  
+LISTEN 0        128                    [::]:22                [::]:*       users:(("sshd",pid=872,fd=8))                          
+LISTEN 0        128                       *:9090                 *:*       users:(("cockpit-ws",pid=6642,fd=3),("systemd",pid=1,fd=85))
+
+[root@tp1-1 ~]# firewall-cmd --permanent --add-port=9090/tcp
+```
+
+Voici le résultat : \
+![cockpit](./cockpit.png)
+
+Dans la section réseau de cockpit on peut voir le traffic, gérer le pare-feu et les interfaces ainsi que voir les logs associés.
+
+## Netdata
+
+L'installation de Netdata se fait dans la plus part des scénarios via une seule commande.
+
+```bash
+[root@tp1-1 ~]# bash <(curl -Ss https://my-netdata.io/kickstart.sh)
+```
+
+Mais avec Centos 8 visiblement cette commande pose problème au moment de l'installation des dépendances donc j'ai essayé avec une solution alternative.
+
+```bash
+[root@tp1-1 ~]#bash <(curl -Ss https://my-netdata.io/kickstart-static64.sh)
+```
+
+Ensuite il faut ouvrir le port.
+
+```bash
+[root@tp1-1 ~]# firewall-cmd --permanent --add-port=19999/tcp
+```
+
+Le résultat sur `TP1-1` :
+
+![Netdata](./Netdata.png)
+
+Une fois installé sur les deux machines il est possible en créant un compte netdata d'accéder aux données des 2 machines à partir d'une seul pour centraliser la gestion.
+
+![netdata_nodes](./netdata_nodes.png)
