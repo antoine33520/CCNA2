@@ -8,6 +8,10 @@
     - [2. Avec trunk](#2-avec-trunk)
   - [IV. Need perfs](#iv-need-perfs)
 
+## La topologie
+
+![Topologie](./Topo.png)
+
 ## I. Simplest setup
 
 - Pour faire communiquer les 2 PCs afin de leurs permettre de se ping il faut leurs donner des adresses IPs
