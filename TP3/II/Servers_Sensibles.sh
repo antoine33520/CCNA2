@@ -13,7 +13,7 @@ send "\x1D"
 expect "telnet>"
 send "quit"
 
-spawn telnet 192.168.68.1 5064
+spawn telnet 192.168.68.1 5074
 send "\r"
 expect ">"
 send "set pcname SRV6\r"

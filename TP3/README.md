@@ -132,13 +132,27 @@ Pour la câblage il faut utilisé courts dans toute la salle R2 (Salle serveur) 
 **Et moins propre aussi :**
 ![Infra_PasPropre](img/infra_paspropre.png)
 
-### Pour la configuration
+### Pour la configuration des VPCS
 
-Je vais pas tout détailler par écrit les fichiers de configuration sont plus explicites (espéront quand même que les scripts fonctionnent parce que 38 machines à la main c'est pas ouff ouff).
+Je vais pas tout détailler par écrit les fichiers de configuration sont plus explicites (vive les scripts parce que 38 machines à la main c'est pas ouff ouff).
 
 - Les imprimantes :
 [Imprimantes](II/Printer.sh)
 - Les utilisateurs :
 [Utilisateurs](II/Users.sh)
+- Les stagiaires :
+[Stagiaires](II/Stagiaires.sh)
+- Les Serveurs :
+[Serveurs](II/Servers.sh)
+- Les Serveurs Sensibles :
+[Serveurs Sensibles](II/Servers_Sensibles.sh)
+- Les Admins :
+[Admins](II/Admins.sh)
 
 *Et donc pour le VPCS avec Except ça fonctionne, il reste à voir plus les switchs et le routeur si c'est aussi "facile" !*
+
+### Configuration des Switchs
+
+Là aussi les scripts seront plus explicites. Le script est en deux parties, une pour le switch principal et l'autre pour les switchs d'accès.
+
+[Configuration des switchs](II/Init_Switch.sh)
