@@ -44,15 +44,15 @@ R1 | x |  `10.3.10.254/24` | `10.3.20.254/24` | `10.3.30.254/24` | `10.3.40.254/
 
 ### Configuration des clients et de l'imprimantes
 
-[script de configuration](./I/VPCS.sh)
+[script de configuration](./I/VPCS.tcl)
 
 ### Configuration du routeur
 
-[script de configuration](./I/Router.sh)
+[script de configuration](./I/Router.tcl)
 
 ### Configuration du switch
 
-[script de configuration](./I/Switch.sh)
+[script de configuration](./I/Switch.tcl)
 
 ### Vérification
 
@@ -137,17 +137,17 @@ Pour la câblage il faut utilisé courts dans toute la salle R2 (Salle serveur) 
 Je vais pas tout détailler par écrit les fichiers de configuration sont plus explicites (vive les scripts parce que 38 machines à la main c'est pas ouff ouff).
 
 - Les imprimantes :
-[Imprimantes](II/Printer.sh)
+[Imprimantes](II/Printer.tcl)
 - Les utilisateurs :
-[Utilisateurs](II/Users.sh)
+[Utilisateurs](II/Users.tcl)
 - Les stagiaires :
-[Stagiaires](II/Stagiaires.sh)
+[Stagiaires](II/Stagiaires.tcl)
 - Les Serveurs :
-[Serveurs](II/Servers.sh)
+[Serveurs](II/Servers.tcl)
 - Les Serveurs Sensibles :
-[Serveurs Sensibles](II/Servers_Sensibles.sh)
+[Serveurs Sensibles](II/Servers_Sensibles.tcl)
 - Les Admins :
-[Admins](II/Admins.sh)
+[Admins](II/Admins.tcl)
 
 *Et donc pour le VPCS avec Except ça fonctionne, il reste à voir plus les switchs et le routeur si c'est aussi "facile" !*
 
@@ -155,4 +155,22 @@ Je vais pas tout détailler par écrit les fichiers de configuration sont plus e
 
 Là aussi les scripts seront plus explicites. Le script est en deux parties, une pour le switch principal et l'autre pour les switchs d'accès.
 
-[Configuration des switchs](II/Init_Switch.sh)
+[Configuration Switchs](II/Init_Switch.tcl)
+
+### Configuration du Routeur
+
+[Configuration du Routeur](II/Router.tcl)
+
+### Tests avant de continuer la configuration du réseau
+
+Pour réaliser ces tests il suffit de faire quelques pings sachant que pour l'instant toutes les machines doivent pouvoir se joindre.
+
+[Script](II/test1.tcl)
+
+Et la sortie de la commande ./test1.tcl > test1.log [ici](II/test1.log)
+
+### Autorisations
+
+Pour mettre en place les exeptions du tableau il faut mettre en place des ACLs.
+
+[Configuration des ACL](II/acl.tcl)

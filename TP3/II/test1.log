@@ -1,0 +1,50 @@
+spawn telnet 192.168.68.1 5000
+
+Trying 192.168.68.1...
+Connected to 192.168.68.1.
+Escape character is '^]'.
+
+U1> ping 192.168.110.2
+84 bytes from 192.168.110.2 icmp_seq=1 ttl=64 time=0.598 ms
+84 bytes from 192.168.110.2 icmp_seq=2 ttl=64 time=0.720 ms
+84 bytes from 192.168.110.2 icmp_seq=3 ttl=64 time=0.709 ms
+84 bytes from 192.168.110.2 icmp_seq=4 ttl=64 time=0.701 ms
+84 bytes from 192.168.110.2 icmp_seq=5 ttl=64 time=0.700 ms
+
+U1> ping 192.168.120.1
+192.168.120.1 icmp_seq=1 timeout
+84 bytes from 192.168.120.1 icmp_seq=2 ttl=63 time=13.385 ms
+84 bytes from 192.168.120.1 icmp_seq=3 ttl=63 time=11.688 ms
+84 bytes from 192.168.120.1 icmp_seq=4 ttl=63 time=21.026 ms
+84 bytes from 192.168.120.1 icmp_seq=5 ttl=63 time=11.476 ms
+
+U1> ping 192.168.130.1
+192.168.130.1 icmp_seq=1 timeout
+84 bytes from 192.168.130.1 icmp_seq=2 ttl=63 time=14.376 ms
+84 bytes from 192.168.130.1 icmp_seq=3 ttl=63 time=11.222 ms
+84 bytes from 192.168.130.1 icmp_seq=4 ttl=63 time=11.953 ms
+84 bytes from 192.168.130.1 icmp_seq=5 ttl=63 time=11.660 ms
+
+U1> ping 192.168.140.1
+192.168.140.1 icmp_seq=1 timeout
+84 bytes from 192.168.140.1 icmp_seq=2 ttl=63 time=14.120 ms
+84 bytes from 192.168.140.1 icmp_seq=3 ttl=63 time=11.266 ms
+84 bytes from 192.168.140.1 icmp_seq=4 ttl=63 time=11.534 ms
+84 bytes from 192.168.140.1 icmp_seq=5 ttl=63 time=20.754 ms
+
+U1> ping 192.168.150.1
+192.168.150.1 icmp_seq=1 timeout
+84 bytes from 192.168.150.1 icmp_seq=2 ttl=63 time=15.431 ms
+84 bytes from 192.168.150.1 icmp_seq=3 ttl=63 time=11.603 ms
+84 bytes from 192.168.150.1 icmp_seq=4 ttl=63 time=21.134 ms
+84 bytes from 192.168.150.1 icmp_seq=5 ttl=63 time=11.391 ms
+
+U1> ping 192.168.160.1
+192.168.160.1 icmp_seq=1 timeout
+84 bytes from 192.168.160.1 icmp_seq=2 ttl=63 time=13.956 ms
+84 bytes from 192.168.160.1 icmp_seq=3 ttl=63 time=11.087 ms
+84 bytes from 192.168.160.1 icmp_seq=4 ttl=63 time=11.562 ms
+84 bytes from 192.168.160.1 icmp_seq=5 ttl=63 time=21.137 ms
+
+U1> 
+telnet> 
