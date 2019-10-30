@@ -64,7 +64,7 @@ expect "(config-ext-nacl)#"
 send "exit\r"
 expect "(config)#"
 
-send "ip access-list extended ss_int\r"
+send "ip access-list extended ss_in\r"
 expect "(config-ext-nacl)#"
 send "1 permit ip 192.168.160.0 0.0.0.7 192.168.160.0 0.0.0.7\r"
 expect "(config-ext-nacl)#"
@@ -106,7 +106,27 @@ foreach ip $R4 {
 foreach ip $R5 {
     send "permit ip host $ip host 192.168.130.3\r"
     expect "(config-ext-nacl)#"
-    send "permit ip host $ip host 192.168.130.4\r"
+foreach int $subint {
+    if {$int == 10} {
+        set acl users
+    } elseif {$int == 20} {
+        set acl stagiaires
+    } elseif {$int == 30} {
+        set acl imprimantes
+    } elseif {$int == 40} {
+        set acl admins
+    } elseif {$int == 50} {
+        set acl serveurs
+    } elseif {$int == 60} {
+        set acl ss_in
+    }
+    expect "(config)#"
+    send "int f0/0.$int\r"
+    expect "(config-subif)#"
+    send "access-list extended $acl in\r"
+    expect "(config-subif)#"
+    send "exit\r"
+}    send "permit ip host $ip host 192.168.130.4\r"
     expect "(config-ext-nacl)#"
 }
 expect "(config-ext-nacl)#"
@@ -114,3 +134,51 @@ send "default deny ip any any\r"
 expect "(config-ext-nacl)#"
 send "exit\r"
 expect "(config)#"
+
+set subint_in [list 10 20 30 40 50 60]
+set acl
+foreach int $subint_in {
+    if {$int == 10} {
+        set acl users
+    } elseif {$int == 20} {
+        set acl stagiaires
+    } elseif {$int == 30} {
+        set acl imprimantes
+    } elseif {$int == 40} {
+        set acl admins
+    } elseif {$int == 50} {
+        set acl serveurs
+    } elseif {$int == 60} {
+        set acl ss_in
+    }
+    expect "(config)#"
+    send "int f0/0.$int\r"
+    expect "(config-subif)#"
+    send "access-list extended $acl in\r"
+    expect "(config-subif)#"
+    send "exit\r"
+}
+
+set subint_out [list 60]
+set acl
+foreach int $subint_out {
+    if {$int == 10} {
+        # set acl users
+    } elseif {$int == 20} {
+        # set acl stagiaires
+    } elseif {$int == 30} {
+        # set acl imprimantes
+    } elseif {$int == 40} {
+        # set acl admins
+    } elseif {$int == 50} {
+        # set acl serveurs
+    } elseif {$int == 60} {
+        set acl ss_out
+    }
+    expect "(config)#"
+    send "int f0/0.$int\r"
+    expect "(config-subif)#"
+    send "access-list extended $acl out\r"
+    expect "(config-subif)#"
+    send "exit\r"
+}
