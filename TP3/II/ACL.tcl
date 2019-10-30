@@ -106,27 +106,7 @@ foreach ip $R4 {
 foreach ip $R5 {
     send "permit ip host $ip host 192.168.130.3\r"
     expect "(config-ext-nacl)#"
-foreach int $subint {
-    if {$int == 10} {
-        set acl users
-    } elseif {$int == 20} {
-        set acl stagiaires
-    } elseif {$int == 30} {
-        set acl imprimantes
-    } elseif {$int == 40} {
-        set acl admins
-    } elseif {$int == 50} {
-        set acl serveurs
-    } elseif {$int == 60} {
-        set acl ss_in
-    }
-    expect "(config)#"
-    send "int f0/0.$int\r"
-    expect "(config-subif)#"
-    send "access-list extended $acl in\r"
-    expect "(config-subif)#"
-    send "exit\r"
-}    send "permit ip host $ip host 192.168.130.4\r"
+    send "permit ip host $ip host 192.168.130.4\r"
     expect "(config-ext-nacl)#"
 }
 expect "(config-ext-nacl)#"
@@ -135,9 +115,9 @@ expect "(config-ext-nacl)#"
 send "exit\r"
 expect "(config)#"
 
-set subint_in [list 10 20 30 40 50 60]
+set subintIn [list 10 20 30 40 50 60]
 set acl
-foreach int $subint_in {
+foreach int $subintIn {
     if {$int == 10} {
         set acl users
     } elseif {$int == 20} {
@@ -159,9 +139,9 @@ foreach int $subint_in {
     send "exit\r"
 }
 
-set subint_out [list 60]
+set subintOut [list 60]
 set acl
-foreach int $subint_out {
+foreach int $subintOut {
     if {$int == 10} {
         # set acl users
     } elseif {$int == 20} {
@@ -182,3 +162,12 @@ foreach int $subint_out {
     expect "(config-subif)#"
     send "exit\r"
 }
+expect "(config)"
+send "exit\r"
+expect "#"
+send "wr\r"
+send "\r"
+expect "#"
+send "\x1D"
+expect "telnet>"
+send "quit\r"
