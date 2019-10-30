@@ -171,6 +171,7 @@ Et la sortie de la commande ./test1.tcl > test1.log [ici](II/test1.log)
 
 ### Autorisations
 
-Pour mettre en place les exeptions du tableau il faut mettre en place des ACLs.
+Pour mettre en place les exeptions du tableau il faut mettre en place des ACLs.\
+*Et c'était très long à faire :'(*
 
 [Configuration des ACL](II/acl.tcl)
