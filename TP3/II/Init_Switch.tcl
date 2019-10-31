@@ -132,10 +132,11 @@ foreach port $list_port {
     expect "(config)#"
 
     if { $i == 1} {
-        #SW1
+        #SW1 - e0/3 pour test dhcp
         array set var {
             e0/1 40
             e0/2 30
+            e0/3 10
         }
     } elseif { $i == 2 } {
         #SW2

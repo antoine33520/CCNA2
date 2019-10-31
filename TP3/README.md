@@ -192,3 +192,24 @@ ens33 : dhcp (host-only)
 [dhcp_server.sh](II/dhcp_server.sh)
 
 Le serveur est relié au switch par un lien trunk acceptant son vlan ainsi que ceux correspondant au pool d'adresses dhcp.
+
+Et pour prouver que tout fonctionne le mieux est de faire un petit test. Le VPCS PC1 est connecté au switch SW1 sur le port e0/3 en mode access sur le vlan Utilisateurs 10.
+
+```bios
+PC1> ip dhcp
+DDORA IP 192.168.110.17/27 GW 192.168.110.30
+
+PC1> sh ip
+
+NAME        : PC1[1]
+IP/MASK     : 192.168.110.17/27
+GATEWAY     : 192.168.110.30
+DNS         : 8.8.8.8  8.8.4.4
+DHCP SERVER : 192.168.110.29
+DHCP LEASE  : 3489, 3600/1800/3150
+DOMAIN NAME : tp3.local
+MAC         : 00:50:79:66:68:26
+LPORT       : 10117
+RHOST:PORT  : 127.0.0.1:10118
+MTU:        : 1500
+```
