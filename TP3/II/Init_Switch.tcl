@@ -68,7 +68,7 @@ send "switchport trunk allowed vlan 10,20,30,40,50,60\r"
 expect "(config-if-range)#"
 send "exit\r"
 expect "(config)#"
-send "exit\r"
+send "end\r"
 expect "#"
 send "wr\r"
 send "\r"
@@ -205,7 +205,7 @@ foreach port $list_port {
     }
     array donesearch var $start
 
-    send "exit\r"
+    send "end\r"
     expect "#"
     send "wr\r"
     send "\r"
@@ -214,3 +214,26 @@ foreach port $list_port {
     expect "telnet>"
     send "quit\r"
 }
+
+#DHCP
+spawn telnet 192.168.68.129 5001
+send "\r"
+send "\r"
+expect "#"
+send "conf t\r"
+expect "(config)#"
+send "int e2/3\r"
+expect "(config-if)#"
+send "switchport trunk encapsulation dot1q\r"
+expect "(config-if)#"
+send "switchport mode trunk\r"
+expect "(config-if)#"
+send "switchport trunk allowed vlan 10,20,40,50\r"
+expect "(config-if)#"
+send "end\r"
+send "wr\r"
+send "\r"
+expect "#"
+send "\x1D"
+expect "telnet>"
+send "quit\r"

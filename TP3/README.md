@@ -175,3 +175,20 @@ Pour mettre en place les exeptions du tableau il faut mettre en place des ACLs.\
 *Et c'était très long à faire :'(*
 
 [Configuration des ACL](II/acl.tcl)
+
+### DHCP
+
+Le serveur DHCP est une VM Centos 7 *(Logique non ?)*\
+ens32 : 192.168.150.5/29 (Vlan 50 Serveurs)
+ens33 : dhcp (host-only)
+
+#### Installation du serveur
+
+```bash
+[root@dhcp ~]# yum install dhcp
+[root@dhcp ~]# ./dhcp_server.sh
+```
+
+[dhcp_server.sh](II/dhcp_server.sh)
+
+Le serveur est relié au switch par un lien trunk acceptant son vlan ainsi que ceux correspondant au pool d'adresses dhcp.

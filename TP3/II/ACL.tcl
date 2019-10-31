@@ -109,14 +109,12 @@ foreach ip $R5 {
     send "permit ip host $ip host 192.168.130.4\r"
     expect "(config-ext-nacl)#"
 }
-expect "(config-ext-nacl)#"
+
 send "default deny ip any any\r"
 expect "(config-ext-nacl)#"
 send "exit\r"
-expect "(config)#"
 
 set subintIn [list 10 20 30 40 50 60]
-set acl
 foreach int $subintIn {
     if {$int == 10} {
         set acl users
@@ -134,13 +132,12 @@ foreach int $subintIn {
     expect "(config)#"
     send "int f0/0.$int\r"
     expect "(config-subif)#"
-    send "access-list extended $acl in\r"
+    send "ip access-group $acl in\r"
     expect "(config-subif)#"
     send "exit\r"
 }
 
 set subintOut [list 60]
-set acl
 foreach int $subintOut {
     if {$int == 10} {
         # set acl users
@@ -158,7 +155,7 @@ foreach int $subintOut {
     expect "(config)#"
     send "int f0/0.$int\r"
     expect "(config-subif)#"
-    send "access-list extended $acl out\r"
+    send "ip access-group $acl out\r"
     expect "(config-subif)#"
     send "exit\r"
 }
