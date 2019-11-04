@@ -44,15 +44,15 @@ R1 | x |  `10.3.10.254/24` | `10.3.20.254/24` | `10.3.30.254/24` | `10.3.40.254/
 
 ### Configuration des clients et de l'imprimantes
 
-[script de configuration](./I/VPCS.tcl)
+[script de configuration](./I/VPCS.sh)
 
 ### Configuration du routeur
 
-[script de configuration](./I/Router.tcl)
+[script de configuration](./I/Router.sh)
 
 ### Configuration du switch
 
-[script de configuration](./I/Switch.tcl)
+[script de configuration](./I/Switch.sh)
 
 ### Vérification
 
