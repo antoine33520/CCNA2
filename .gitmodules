@@ -1,0 +1,3 @@
+[submodule "labreseau"]
+	path = labreseau
+	url = git@gitlab.com:antoine33520/labreseau.git
